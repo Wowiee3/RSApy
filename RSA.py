@@ -41,18 +41,23 @@ def enc(e, n):
     ciphertext = []
     for i in encoded:
         ciphertext.append(pow(i, e, n))
+    print("Your ciphertext is: ", ciphertext)
     return ciphertext
 
 def dec(c, d, n):
+    # format user input into a list
+    formatted = c.split()
+
     # c^d mod n
     decoded = []
-    for i in c:
-        decoded.append(pow(i, d, n))
+    for i in formatted:
+        decoded.append(pow(int(i), d, n))
 
     # Convert the message back to ascii
     message = ""
     for i in decoded:
         message += chr(i)
+    print("Your decrypted message is: ", message)
     return message
 
 
@@ -87,7 +92,15 @@ print("Finished!")
 print("Public key = {", e, ", ", n, "}")
 print("Private key = {", d, ", ", n, "}")
 
-c = enc(e, n)
-print("Your ciphertext is: ", c)
-m = dec(c, d, n)
-print("Your original message is: ", m)
+print("What would you like to do?")
+print("1: Encrypt message using generated keys")
+print("2: Decrypt message using user-inputted values")
+
+choice = input("Your choice: ")
+if choice == "1":
+    c = enc(e, n)
+if choice == "2":
+    u_cipher = input("Enter ciphertext seperated by whitespace (e.g. 231245 131256 463754): ")
+    u_d = int(input("Enter 'd' value of private key: "))
+    u_n = int(input("Enter 'n' value of private key: "))
+    dec(u_cipher, u_d, u_n)
