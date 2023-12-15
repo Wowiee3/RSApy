@@ -97,10 +97,21 @@ print("1: Encrypt message using generated keys")
 print("2: Decrypt message using user-inputted values")
 
 choice = input("Your choice: ")
+if choice not in "12":
+    print("Invalid choice, exiting...")
+    exit()
 if choice == "1":
     c = enc(e, n)
 if choice == "2":
     u_cipher = input("Enter ciphertext seperated by whitespace (e.g. 231245 131256 463754): ")
-    u_d = int(input("Enter 'd' value of private key: "))
-    u_n = int(input("Enter 'n' value of private key: "))
+    try:
+        u_d = int(input("Enter 'd' value of private key: "))
+    except:
+        print("Invalid data type, exiting..")
+        exit()
+    try:
+        u_n = int(input("Enter 'n' value of private key: "))
+    except:
+        print("Invalid data type, exiting..")
+        exit()
     dec(u_cipher, u_d, u_n)
